@@ -5,7 +5,9 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { clientRouter } from "./v1/Registro/Infrestructura/interfaces/http/router/RegistroRouter.js";
+import { ProductoRouter } from "./v1/Producto/Infrestructura/interfaces/http/router/ProductoRouter.js";
 import { clientVerific } from "./v1/Registro/Infrestructura/interfaces/http/router/VericadorRouter.js";
+
 const app = express();
 
 app.use(express.static('public'));
@@ -21,6 +23,7 @@ app.use(express.json());
 
 // Rutas de la API Usuarios
 app.use("/api/v1", clientRouter);
+app.use("/api/v1", ProductoRouter);
 // Endpoint para servir el archivo HTML
 app.use("/api/v1", clientVerific);
 
