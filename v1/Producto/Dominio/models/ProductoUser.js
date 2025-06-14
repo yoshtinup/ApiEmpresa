@@ -1,11 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
 
 export class ProductoUser {
-  constructor(id, nombre, cantidad, precio = null) {
+  constructor(id, nombre, cantidad, precio , imagen= null) {
     this.id = id;
     this.nombre = nombre;
     this.cantidad = cantidad;
     this.precio = precio; 
+    this.imagen = imagen;
   }
 
 
