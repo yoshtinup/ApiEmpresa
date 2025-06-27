@@ -66,15 +66,22 @@ export class RegistroController {
         return res.status(401).json({ message: 'Invalid username or password' });
       }
 
-      // Crear el token JWT si el usuario es válido
-      const token = jwt.sign(
-        { id: verifiedUser.id, usuario: verifiedUser.usuario },
-        process.env.JWT_SECRET || 'tu_secreto_super_secreto', // Secreto JWT
-        { expiresIn: '1h' } // Expiración del token
-      );
+    // Incluir el rol en el payload del token
+    // Solo incluir la información necesaria en el JWT
+    const token = jwt.sign(
+      {
+        id: verifiedUser.id,
+        rol: verifiedUser.rol, // Se incluye en el token, no en la respuesta aparte
+      },
+      process.env.JWT_SECRET || 'tu_secreto_super_secreto',
+      { expiresIn: '1h' }
+    );
 
-      // Responder con el token
-      res.status(200).json({ message: 'Login successful', token });
+    // Responder solo con el token
+    res.status(200).json({
+      message: 'Login successful',
+      token
+    });
     } catch (error) {
       res.status(401).json({ message: error.message });
     }
