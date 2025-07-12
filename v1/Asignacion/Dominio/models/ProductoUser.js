@@ -1,10 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
 
 export class ProductoUser {
-  constructor(id, iduser, idproduc= null) {
+  constructor(id, iduser, idproduc, cantidad = null) {
     this.id = id;
     this.iduser = iduser;
     this.idproduc = idproduc;
+    this.cantidad = cantidad;
   }
 
 

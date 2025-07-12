@@ -58,12 +58,13 @@ export class ProductoController {
   async createProducto(req, res) {
     try {
       // Extraer los campos del cuerpo de la solicitud (body)
-      const { iduser, idproduc} = req.body;
+      const { iduser, idproduc, cantidad} = req.body;
   
       // Crear el objeto que será pasado al caso de uso para crear el boleto
       const productoData = {
         iduser: iduser ?? '',
-        idproduc: idproduc ?? ''
+        idproduc: idproduc ?? '',
+        cantidad: cantidad ?? '',
       };
   
       // Ejecutar el caso de uso para crear el boleto
