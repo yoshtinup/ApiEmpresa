@@ -17,11 +17,12 @@ export class ProductoRepository extends IProductoRepository {
   }
   
   async updateProductoById(id, producto) {
-    const sql = "UPDATE producto SET nombre = ?, cantidad = ?, precio = ? WHERE id = ?";
+    const sql = "UPDATE producto SET nombre = ?, cantidad = ?, precio = ?, imagen = ? WHERE id = ?";
     const params = [
       producto.nombre ?? null,
       producto.cantidad ?? null,
       producto.precio ?? null,
+      producto.imagen ?? null,
       id
     ];
   
