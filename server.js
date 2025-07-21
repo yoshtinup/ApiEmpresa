@@ -8,6 +8,7 @@ import { clientRouter } from "./v1/Registro/Infrestructura/interfaces/http/route
 import { ProductoRouter } from "./v1/Producto/Infrestructura/interfaces/http/router/ProductoRouter.js";
 import { clientVerific } from "./v1/Registro/Infrestructura/interfaces/http/router/VericadorRouter.js";
 import { AsingnacionRouter } from "./v1/Asignacion/Infrestructura/interfaces/http/router/AsingnacionRouter.js";
+import { CursoRouter } from "./v1/Cursos/Infrestructura/interfaces/http/router/CursoRouter.js";
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use("/api/v1", clientRouter);
 app.use("/api/v1", ProductoRouter);
 //ruta de las asignacion de productos
 app.use("/api/v1", AsingnacionRouter);
+app.use("/api/v1", CursoRouter);
 // Endpoint para servir el archivo HTML
 app.use("/api/v1", clientVerific);
 
