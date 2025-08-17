@@ -1,10 +1,9 @@
-
 import { GetProductoById } from "../../../Aplicativo/GetProductoById.js";
-
 import { GetAllProducto } from "../../../Aplicativo/GetAllProducto.js";
 import { CreateProducto } from "../../../Aplicativo/CreateProducto.js";
 import { UpdateProductoById } from "../../../Aplicativo/UpdateProductoById.js";
 import { DeleteProductoById } from "../../../Aplicativo/DeleteProductoById.js";
+import axios from 'axios';
 
 export class ProductoController {
   constructor(productoRepository) {
@@ -60,20 +59,26 @@ export class ProductoController {
       // Extraer los campos del cuerpo de la solicitud (body)
       const { id_curso, id_encargado, excel } = req.body;
 
-      // Crear el objeto que será pasado al caso de uso para crear el boleto
+      // Validar que los campos requeridos estén presentes
+      if (!id_curso || !id_encargado) {
+        return res.status(400).json({ 
+          message: 'id_curso and id_encargado are required' 
+        });
+      }
+
+      // Crear el objeto que será pasado al caso de uso
       const productoData = {
-        id_curso: id_curso ?? '',
-        id_encargado: id_encargado ?? '',
-        excel: excel ?? '',
+        id_curso: parseInt(id_curso), // ✅ Convertir a entero
+        id_encargado: parseInt(id_encargado), // ✅ Convertir a entero
+        excel: excel || null,
       };
-  
-      // Ejecutar el caso de uso para crear el boleto
+
+      // Ejecutar el caso de uso para crear el registro
       const newBoleto = await this.createBoletoUseCase.execute(productoData);
-  
-      // Enviar la respuesta con el boleto creado
+
+      // Enviar la respuesta
       res.status(201).json(newBoleto);
     } catch (error) {
-      // En caso de error, responder con el mensaje de error
       res.status(500).json({ message: error.message });
     }
   }
@@ -101,5 +106,18 @@ export class ProductoController {
     }
   }
 
+  async crearAsignacionCurso(asignacion) {
+    try {
+      const response = await axios.post('http://localhost:3002/api/v1/asignar-curso', {
+        id_curso: parseInt(asignacion.id_curso),
+        id_encargado: parseInt(asignacion.id_encargado),
+        excel: asignacion.excel
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error en asignacionCursoService:', error.response?.data || error.message);
+      throw error;
+    }
+  }
 }
 
