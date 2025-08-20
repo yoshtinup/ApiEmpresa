@@ -54,15 +54,27 @@ export class ProductoRepository extends IProductoRepository {
   throw new Error(error.sqlMessage || error.message || 'Error retrieving clients');
     }
   }
-  async getProductoById(id) {
-    const sql = "SELECT * FROM `asignacion-curso` WHERE id=?";
+  
+  async getProductoRegistroById(id) {
+    const sql = "SELECT * FROM `asignacion-curso` WHERE id = ?";
     const params = [id];
     try {
       const [result] = await db.query(sql, params);
-      return result[0]; // Devolvemos el primer resultado ya que la búsqueda es por ID
+      return result[0] || null;
     } catch (error) {
-  console.error('Database Error (SELECT BY ID asignacion-curso):', { sql, params, error });
-  throw new Error(error.sqlMessage || error.message || 'Error retrieving History by ID');
+      console.error('Database Error (SELECT BY ID asignacion-curso):', { sql, params, error });
+      throw new Error(error.sqlMessage || error.message || 'Error retrieving record by ID');
+    }
+  }
+  async getProductoById(id_curso) {
+    const sql = "SELECT * FROM `asignacion-curso` WHERE id_curso = ?";
+    const params = [id_curso];
+    try {
+      const [result] = await db.query(sql, params);
+      return result; // Devolver todos los registros que coincidan con el id_curso
+    } catch (error) {
+      console.error('Database Error (SELECT BY id_curso asignacion-curso):', { sql, params, error });
+      throw new Error(error.sqlMessage || error.message || 'Error retrieving records by id_curso');
     }
   }
   

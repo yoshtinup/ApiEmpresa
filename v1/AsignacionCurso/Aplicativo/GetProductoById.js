@@ -5,11 +5,11 @@ export class GetProductoById {
   
     /**
      * Ejecutar la obtención de un cliente por su ID.
-     * @param {number} id- El ID del cliente.
-     * @returns {Promise<Object>} - Los datos del cliente encontrado.
+    * @param {number} id_curso - El ID del curso.
+    * @returns {Promise<Array<Object>>} - Los datos encontrados.
      */
-    async execute(id) {
-      return await this.productoRepository.getProductoById(id);
+    async execute(id_curso) {
+      return await this.productoRepository.getProductoById(id_curso);
     }
   }
   

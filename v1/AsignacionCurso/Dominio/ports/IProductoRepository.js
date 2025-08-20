@@ -15,4 +15,7 @@ export class IProductoRepository {
     deleteProductoById(id){
         throw new Error('Metodo de mostrar History no se implemento correctamente');
     }
+    getProductoRegistroById(id){
+        throw new Error('Metodo de mostrar History no se implemento correctamente');
+    }
   }

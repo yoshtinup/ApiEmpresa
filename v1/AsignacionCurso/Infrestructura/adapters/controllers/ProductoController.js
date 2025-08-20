@@ -1,4 +1,5 @@
 import { GetProductoById } from "../../../Aplicativo/GetProductoById.js";
+import { GetProductoRegistroById } from "../../../Aplicativo/GetProductoRegistroById.js";
 import { GetAllProducto } from "../../../Aplicativo/GetAllProducto.js";
 import { CreateProducto } from "../../../Aplicativo/CreateProducto.js";
 import { UpdateProductoById } from "../../../Aplicativo/UpdateProductoById.js";
@@ -8,6 +9,7 @@ import axios from 'axios';
 export class ProductoController {
   constructor(productoRepository) {
     this.getHistoryByIdUseCase = new GetProductoById(productoRepository);
+  this.getByRegistroIdUseCase = new GetProductoRegistroById(productoRepository);
     this.getAllHistoryUseCase = new GetAllProducto(productoRepository);
     this.createBoletoUseCase = new CreateProducto(productoRepository);
     this.updateHistoryByIdUseCase = new UpdateProductoById(productoRepository);
@@ -86,10 +88,24 @@ export class ProductoController {
 
   async getProductoById(req, res) {
     try {
+      const { id_curso } = req.params;
+      const records = await this.getHistoryByIdUseCase.execute(id_curso);
+      if (records && records.length > 0) {
+        res.status(200).json(records);
+      } else {
+        res.status(404).json({ message: 'No records found for id_curso' });
+      }
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+
+  async getProductoByRegistroId(req, res) {
+    try {
       const { id } = req.params;
-      const client = await this.getHistoryByIdUseCase.execute(id);
-      if (client) {
-        res.status(200).json(client);
+      const record = await this.getByRegistroIdUseCase.execute(id);
+      if (record) {
+        res.status(200).json(record);
       } else {
         res.status(404).json({ message: 'Client not found' });
       }
