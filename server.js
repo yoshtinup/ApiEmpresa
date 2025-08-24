@@ -10,6 +10,7 @@ import { clientVerific } from "./v1/Registro/Infrestructura/interfaces/http/rout
 import { AsingnacionRouter } from "./v1/Asignacion/Infrestructura/interfaces/http/router/AsingnacionRouter.js";
 import { CursoRouter } from "./v1/Cursos/Infrestructura/interfaces/http/router/CursoRouter.js";
 import { AsingnacionCursoRouter } from "./v1/AsignacionCurso/Infrestructura/interfaces/http/router/AsingnacionRouter.js";
+import { CarritoRouter } from "./v1/Carrito/Infrestructura/interfaces/http/router/CarritoRouter.js";
 const app = express();
 
 app.use(express.static('public'));
@@ -33,6 +34,8 @@ app.use("/api/v1", CursoRouter);
 app.use("/api/v1", clientVerific);
 //Endpoint para la asignacion de cursos
 app.use("/api/v1", AsingnacionCursoRouter);
+//Endpoint Para Carrito
+app.use("/api/v1", CarritoRouter);
 
 app.get('/mostrar-html', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
