@@ -35,7 +35,7 @@ export class ProductoController {
       const productoData = req.body;
   
       // Validar que los datos estén presentes y no sean undefined o vacíos
-      if ( !productoData.id_encargado || !productoData.id_producto || !productoData.cantidad || !productoData.total) {
+      if ( !productoData.iduser || !productoData.idproduc ) {
         return res.status(400).json({ message: 'All fields are required' });
       }
   
@@ -59,21 +59,20 @@ export class ProductoController {
   async createProducto(req, res) {
     try {
       // Extraer los campos del cuerpo de la solicitud (body)
-      const { id_encargado, id_producto, cantidad, total } = req.body;
+      const { id_encargado, total_final, productos } = req.body;
 
       // Validar que los campos requeridos estén presentes
-      if (!id_encargado || !id_producto || !cantidad || !total) {
+      if (!id_encargado || !total_final || !Array.isArray(productos)) {
         return res.status(400).json({
-          message: 'id_encargado, id_producto, cantidad and total are required'
+          message: 'id_encargado, total_final and productos are required'
         });
       }
 
       // Crear el objeto que será pasado al caso de uso
       const productoData = {
-        id_producto: parseInt(id_producto), // ✅ Convertir a entero
         id_encargado: parseInt(id_encargado), // ✅ Convertir a entero
-        cantidad: parseInt(cantidad), // ✅ Convertir a entero
-        total: parseFloat(total), // ✅ Convertir a número decimal
+        total_final: parseFloat(total_final), // ✅ Convertir a número
+        productos: Array.isArray(productos) ? productos : [], // ✅ Asegurarse de que sea un array
       };
 
       // Ejecutar el caso de uso para crear el registro
@@ -126,7 +125,7 @@ export class ProductoController {
   async crearAsignacionCurso(asignacion) {
     try {
       const response = await axios.post('http://localhost:3002/api/v1/asignar-curso', {
-        id_encargado: parseInt(asignacion.id_encargado),
+        id_curso: parseInt(asignacion.id_curso),
         id_encargado: parseInt(asignacion.id_encargado),
         excel: asignacion.excel
       });

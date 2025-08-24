@@ -9,13 +9,16 @@ export const CarritoRouter = express.Router();
 const asignadoRepository = new ProductoRepository();
 const asignadoController = new ProductoController(asignadoRepository);
 
-// Definir la ruta POST /clients
+// Rutas de Carrito
 
 CarritoRouter.get('/carrito', (req, res) => asignadoController.getAllProducto(req, res));
 // Buscar por ID del registro
 CarritoRouter.get("/carrito/:id", (req, res) => asignadoController.getProductoByRegistroId(req, res));
-// Buscar por id_curso
-CarritoRouter.get("/carrito/curso/:id_curso", (req, res) => asignadoController.getProductoById(req, res));
+// Buscar por id_encargado
+CarritoRouter.get("/carrito/encargado/:id_encargado", (req, res) => asignadoController.getProductoById(req, res));
+//crear un nuevo carrito
 CarritoRouter.post("/carrito",(req, res) => asignadoController.createProducto(req, res));
+//actulizar un carrito
 CarritoRouter.put("/carrito/:id",(req, res) => asignadoController.updateProductoById(req, res));
+//eliminar un carrito
 CarritoRouter.delete("/carrito/:id" ,(req, res) => asignadoController.deleteProductoById(req, res));

@@ -11,6 +11,7 @@ import { AsingnacionRouter } from "./v1/Asignacion/Infrestructura/interfaces/htt
 import { CursoRouter } from "./v1/Cursos/Infrestructura/interfaces/http/router/CursoRouter.js";
 import { AsingnacionCursoRouter } from "./v1/AsignacionCurso/Infrestructura/interfaces/http/router/AsingnacionRouter.js";
 import { CarritoRouter } from "./v1/Carrito/Infrestructura/interfaces/http/router/CarritoRouter.js";
+import { VentaRouter } from "./v1/Ventas/Infrestructura/interfaces/http/router/VentaRouter.js";
 const app = express();
 
 app.use(express.static('public'));
@@ -23,6 +24,18 @@ const __dirname = path.dirname(__filename);
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Manejar JSON inválido de forma amigable
+app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+    return res.status(400).json({
+      message: 'JSON inválido. Verifica comas, llaves y comillas.',
+      detail: err.message
+    });
+  }
+  next(err);
+});
 
 // Rutas de la API Usuarios
 app.use("/api/v1", clientRouter);
@@ -36,6 +49,8 @@ app.use("/api/v1", clientVerific);
 app.use("/api/v1", AsingnacionCursoRouter);
 //Endpoint Para Carrito
 app.use("/api/v1", CarritoRouter);
+//Enpoint Para Ventas
+app.use("/api/v1", VentaRouter);
 
 app.get('/mostrar-html', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
