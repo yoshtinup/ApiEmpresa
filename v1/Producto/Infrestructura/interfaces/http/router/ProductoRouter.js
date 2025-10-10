@@ -9,8 +9,7 @@ export const ProductoRouter = express.Router();
 const productoRepository = new ProductoRepository();
 const productoController = new ProductoController(productoRepository);
 
-// Definir la ruta POST /clients
-
+// Rutas de Productos
 ProductoRouter.get('/producto', (req, res) => productoController.getAllProducto(req, res));
 ProductoRouter.get("/producto/:id", (req, res) => productoController.getProductoById(req, res));
 ProductoRouter.post("/producto",(req, res) => productoController.createProducto(req, res));

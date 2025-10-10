@@ -22,7 +22,7 @@ const clientRateLimiter = rateLimit({
   }
 });
 
-// Aplicar el rate limiter y auditLogger a las rutas específicas de clientRouter
+// Rutas de Usuarios
 clientRouter.post('/usuario', auditLogger('Registro de Cliente'), (req, res) => clientController.createClient(req, res));
 clientRouter.get('/usuario',auditLogger('Consulta de Clientes'), (req, res) => clientController.getAllClients(req, res));
 clientRouter.post('/loginNew', auditLogger('Inicio de Sesión'), (req, res) => clientController.verifyLogin(req, res));

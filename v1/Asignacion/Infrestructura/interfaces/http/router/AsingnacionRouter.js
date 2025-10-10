@@ -9,8 +9,7 @@ export const AsingnacionRouter = express.Router();
 const asignadoRepository = new ProductoRepository();
 const asignadoController = new ProductoController(asignadoRepository);
 
-// Definir la ruta POST /clients
-
+// Rutas de Asignaciones
 AsingnacionRouter.get('/asignado', (req, res) => asignadoController.getAllProducto(req, res));
 AsingnacionRouter.get("/asignado/:id", (req, res) => asignadoController.getProductoById(req, res));
 AsingnacionRouter.post("/asignado",(req, res) => asignadoController.createProducto(req, res));
