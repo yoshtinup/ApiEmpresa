@@ -69,7 +69,7 @@ export class RegistroController {
     const token = jwt.sign(
       {
         id: verifiedUser.id,
-        usuario: verifiedUser.usuario, // Se incluye en el token, no en la respuesta aparte
+        rol: verifiedUser.rol, // Se incluye en el token, no en la respuesta aparte
       },
       process.env.JWT_SECRET || 'tu_secreto_super_secreto',
       { expiresIn: '1h' }

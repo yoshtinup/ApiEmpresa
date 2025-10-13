@@ -19,7 +19,7 @@ export class VerifyLogin {
     return {
       id: loginData.id,
       gmail: loginData.gmail,
-      usuario: loginData.usuario, // Asegúrate de que el usuario esté en la base de datos
+      rol: loginData.usuario, // Asegúrate de que el rol esté en la base de datos
       // ⚠️ No incluir password por seguridad
     };
   }
