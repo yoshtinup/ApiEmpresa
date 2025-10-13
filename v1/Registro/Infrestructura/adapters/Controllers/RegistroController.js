@@ -66,12 +66,10 @@ export class RegistroController {
         return res.status(401).json({ message: 'Invalid username or password' });
       }
 
-    // Incluir el rol en el payload del token
-    // Solo incluir la información necesaria en el JWT
     const token = jwt.sign(
       {
         id: verifiedUser.id,
-        rol: verifiedUser.rol, // Se incluye en el token, no en la respuesta aparte
+        usuario: verifiedUser.usuario, // Se incluye en el token, no en la respuesta aparte
       },
       process.env.JWT_SECRET || 'tu_secreto_super_secreto',
       { expiresIn: '1h' }
