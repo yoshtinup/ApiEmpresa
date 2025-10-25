@@ -65,14 +65,15 @@ export class ProductoRepository extends IProductoRepository {
   
   async createNewProducto(producto) {
     // Cambié la tabla y los campos para reflejar un sistema de boletos
-    const sql = "INSERT INTO producto (nombre, cantidad, precio, imagen) VALUES (?, ?, ?, ?)";
+    const sql = "INSERT INTO producto (nombre, cantidad, precio, imagen, precioUnitario) VALUES (?, ?, ?, ?, ?)";
   
     // Convertir valores undefined a null y obtener valores de la instancia `boleto`
     const params = [
       producto.nombre ?? null,
       producto.cantidad ?? null,
       producto.precio ?? null,
-      producto.imagen ?? null
+      producto.imagen ?? null,
+      producto.precioUnitario ?? null
     ];
   
     try {
@@ -85,7 +86,8 @@ export class ProductoRepository extends IProductoRepository {
         nombre: producto.nombre,
         cantidad: producto.cantidad,
         precio: producto.precio,
-        imagen: producto.imagen
+        imagen: producto.imagen,
+        precioUnitario: producto.precioUnitario
       };
     } catch (error) {
       console.error('Database Error:', error);

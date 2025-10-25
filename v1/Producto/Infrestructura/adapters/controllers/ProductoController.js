@@ -58,19 +58,18 @@ export class ProductoController {
   async createProducto(req, res) {
     try {
       // Extraer los campos del cuerpo de la solicitud (body)
-      const { nombre, cantidad, precio, imagen} = req.body;
+      const { nombre, cantidad, precio, imagen, precioUnitario } = req.body;
   
       // Crear el objeto que será pasado al caso de uso para crear el boleto
       const productoData = {
         nombre: nombre ?? '',
         cantidad: cantidad ?? '',
         precio: precio ?? '',
-        imagen: imagen ?? ''
+        imagen: imagen ?? '',
+        precioUnitario : precioUnitario ?? ''
       };
-  
       // Ejecutar el caso de uso para crear el boleto
       const newBoleto = await this.createBoletoUseCase.execute(productoData);
-  
       // Enviar la respuesta con el boleto creado
       res.status(201).json(newBoleto);
     } catch (error) {

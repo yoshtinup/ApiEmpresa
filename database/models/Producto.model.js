@@ -22,6 +22,10 @@ export default function defineProducto(sequelize) {
     imagen: {
       type: DataTypes.STRING(255),
       allowNull: true
+    },
+    precioUnitario: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: true
     }
   }, {
     tableName: 'producto',
