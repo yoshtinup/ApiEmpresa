@@ -109,8 +109,10 @@ async function start() {
       // Importar/registrar modelos dinámicamente
       await initModels(sequelize);
       const force = process.env.DB_SYNC_FORCE && process.env.DB_SYNC_FORCE.toLowerCase() === 'true';
-      signale.note(`Ejecutando sequelize.sync({ force: ${force} })`);
-      await sequelize.sync({ force });
+      // Permitir sincronización no destructiva (ALTER) para alinear columnas/Índices
+      const alter = process.env.DB_SYNC_ALTER && process.env.DB_SYNC_ALTER.toLowerCase() === 'true';
+      signale.note(`Ejecutando sequelize.sync({ force: ${force}, alter: ${alter} })`);
+      await sequelize.sync({ force, alter });
       signale.success('Sincronización de modelos completada.');
     }
 
