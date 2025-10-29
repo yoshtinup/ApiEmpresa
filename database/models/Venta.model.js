@@ -25,24 +25,10 @@ export default function defineVenta(sequelize) {
       type: DataTypes.JSON,
       allowNull: true
     },
-    id_curso: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: true,
-      references: {
-        model: 'curso',
-        key: 'id'
-      },
-      onDelete: 'SET NULL',
-      onUpdate: 'CASCADE'
-    },
-    excel: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
     fecha_venta: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: DataTypes.NOW
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     tableName: 'venta',
@@ -51,7 +37,6 @@ export default function defineVenta(sequelize) {
     collate: 'utf8mb4_unicode_ci',
     indexes: [
       { name: 'idx_venta_id_encargado', fields: ['id_encargado'] },
-      { name: 'idx_venta_id_curso', fields: ['id_curso'] },
       { name: 'idx_venta_fecha', fields: ['fecha_venta'] }
     ]
   });
