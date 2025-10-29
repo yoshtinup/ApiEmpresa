@@ -16,7 +16,7 @@ import { CursoRouter } from "./v1/Cursos/Infrestructura/interfaces/http/router/C
 import { AsingnacionCursoRouter } from "./v1/AsignacionCurso/Infrestructura/interfaces/http/router/AsingnacionRouter.js";
 import { CarritoRouter } from "./v1/Carrito/Infrestructura/interfaces/http/router/CarritoRouter.js";
 import { VentaRouter } from "./v1/Ventas/Infrestructura/interfaces/http/router/VentaRouter.js";
-
+import { IngresoRouter } from "./v1/Ingreso/Infrestructura/interfaces/http/router/IngresoRouter.js";
 const app = express();
 
 app.use(express.static('public'));
@@ -85,6 +85,8 @@ app.use("/api/v1", AsingnacionCursoRouter);
 app.use("/api/v1", CarritoRouter);
 //ruta de ventas
 app.use("/api/v1", VentaRouter);
+//ruta de ingresos
+app.use("/api/v1", IngresoRouter);
 
 app.get('/mostrar-html', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
