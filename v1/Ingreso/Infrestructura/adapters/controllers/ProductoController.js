@@ -33,7 +33,7 @@ export class IngresoController {
       const ingresoData = req.body;
   
       // Validar que los datos estén presentes y no sean undefined o vacíos
-      if ( !ingresoData.nombre || !ingresoData.descripcion || !ingresoData.metodo_pago || !ingresoData.fecha_final) {
+      if ( !ingresoData.nombre || !ingresoData.descripcion || !ingresoData.metodo_pago) {
         return res.status(400).json({ message: 'All fields are required' });
       }
   
