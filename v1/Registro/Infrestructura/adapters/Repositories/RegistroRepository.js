@@ -17,7 +17,7 @@ export class RegistroRepository extends IRegistroRepository {
   }
 
   async createNewClient(client) {
-    const sql = "INSERT INTO usuario(nombre, apellido, telefono, gmail, codigo, usuario) VALUES (?, ?, ?, ?, ?, ?)";
+    const sql = "INSERT INTO usuario(nombre, apellido, telefono, gmail, codigo, usuario, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
    
     // Convertir valores undefined a null
     const params = [
@@ -26,7 +26,8 @@ export class RegistroRepository extends IRegistroRepository {
       client.telefono ?? null,
       client.gmail ?? null,
       client.codigo ?? null,
-      client.usuario ?? null
+      client.usuario ?? null,
+      client.password ?? null
     ];
   
     try {
@@ -39,6 +40,7 @@ export class RegistroRepository extends IRegistroRepository {
         gmail: client.gmail,
         codigo: client.codigo,
         usuario: client.usuario,
+        password: client.password
       };
     } catch (error) {
       console.error('Database Error:', error);
