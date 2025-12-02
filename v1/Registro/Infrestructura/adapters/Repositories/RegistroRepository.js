@@ -74,13 +74,14 @@ export class RegistroRepository extends IRegistroRepository {
     }
   }
   async updateClientById(id, client) {
-    const sql = "UPDATE usuario SET nombre = ?, apellido = ?, telefono = ?, gmail = ?, usuario = ? WHERE id = ?";
+    const sql = "UPDATE usuario SET nombre = ?, apellido = ?, telefono = ?, gmail = ?, usuario = ?, password = ? WHERE id = ?";
     const params = [
       client.nombre ?? null,
       client.apellido ?? null,
       client.telefono ?? null,
       client.gmail ?? null,
       client.usuario ?? null,
+      client.password ?? null,
       id
     ];
   

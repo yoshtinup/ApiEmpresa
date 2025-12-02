@@ -105,7 +105,7 @@ export class RegistroController {
       const clientData = req.body;
   
       // Verificar si al menos un campo está presente para actualizar
-      if (!clientData.nombre && !clientData.apellido && !clientData.telefono && !clientData.gmail && !clientData.codigo && !clientData.usuario) {
+      if (!clientData.nombre && !clientData.apellido && !clientData.telefono && !clientData.gmail && !clientData.codigo && !clientData.usuario && !clientData.password) {
         return res.status(400).json({ message: 'At least one field is required to update' });
       }
   
