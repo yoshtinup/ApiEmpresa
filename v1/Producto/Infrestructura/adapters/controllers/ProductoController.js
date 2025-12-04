@@ -34,7 +34,7 @@ export class ProductoController {
       const productoData = req.body;
   
       // Validar que los datos estén presentes y no sean undefined o vacíos
-      if ( !productoData.nombre || !productoData.cantidad || !productoData.precio, !productoData.imagen ) {
+      if ( !productoData.nombre || !productoData.cantidad || !productoData.precio || !productoData.imagen  || !productoData.precioUnitario ) {
         return res.status(400).json({ message: 'All fields are required' });
       }
   
